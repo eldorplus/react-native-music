@@ -5,7 +5,6 @@ import {
     View,
     Text,
     StyleSheet,
-    StatusBar,
     Image,
 } from 'react-native';
 //第三方组件
@@ -347,7 +346,6 @@ export default class SmartHomeContainer extends Component {
         const music = musicList[currentIndex];//当前播放音乐
         return (
             <View style={styles.smart_home_container}>
-                <StatusBar hidden={true}/>
                 <Navbar toggleMusicList={this._toggleMusicList}/>
                 <MusicContainer songImg={music['songImg']}
                                 songName={music['songName']}

@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
 } from 'react-native';
-import SmartHomeContainer from './app/SmartHomeContainer';
+import App from './app/app';
 
 
-AppRegistry.registerComponent('ReactNativeMusic', () => SmartHomeContainer);
+AppRegistry.registerComponent('ReactNativeMusic', () => App);
