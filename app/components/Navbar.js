@@ -10,6 +10,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Navbar extends Component {
     render() {
+        const {
+            toggleMusicList
+            } =this.props;
+
         return (
             <View style={styles.nav_bar}>
                 <Icon.Button
@@ -17,7 +21,7 @@ export default class Navbar extends Component {
                     size={20}
                     color="white"
                     backgroundColor="transparent"
-                    onPress={()=>{alert(1)}}
+                    onPress={()=>{}}
                     style={{justifyContent:'center'}}
                     iconStyle={{marginRight:0}}
                     />
@@ -26,7 +30,7 @@ export default class Navbar extends Component {
                     name="list" size={20}
                     color="white"
                     backgroundColor="transparent"
-                    onPress={()=>{alert(1)}}
+                    onPress={()=>{toggleMusicList(true)}}
                     style={{justifyContent:'center'}}
                     iconStyle={{marginRight:0}}
                     />

@@ -18,6 +18,9 @@ import MusicContainer from './components/MusicContainer';
 import MusicControllerLine from './components/MusicControllerLine';
 import MusicControllerBar from './components/MusicControllerBar';
 import Utils from'./components/Utils';
+
+import MusicList from './components/MusicList';
+
 //模拟数据
 import MUSICLIST from './Data/MusicList';//音乐数据
 import MODE from './Data/Mode'; //播放模式，包含正常、随机、循环
@@ -35,6 +38,7 @@ export default class SmartHomeContainer extends Component {
             mode: MODE.NORMAL,//播放模式，默认正常
             musicHash: (new Date()).getTime(),//音乐请求hash,在播放下一首时刷新
             isPlay: false,//播放状态
+            showMusicList: false,//显示音乐列表
         }
 
         //es6 在constructor就进行绑定，可以提高性能
@@ -48,6 +52,7 @@ export default class SmartHomeContainer extends Component {
         this._setDuration = this._setDuration.bind(this);
         this._setTime = this._setTime.bind(this);
         this._loadStart = this._loadStart.bind(this);
+        this._toggleMusicList = this._toggleMusicList.bind(this);
     }
 
 
@@ -77,36 +82,43 @@ export default class SmartHomeContainer extends Component {
      * 播放下一首歌前，先停止播放，再根据听歌模式选择歌曲索引
      * @private
      */
-    _onPlayNext() {
+    _onPlayNext(index) {
         this._onStop();
 
         const {mode,currentIndex} =this.state;
         let _currentIndex = currentIndex;
-        switch (mode) {
-            case MODE.NORMAL:
-                //正常模式
-                _currentIndex = this._getNormalNextIndex();
-                break;
-            case MODE.CYCLE:
-                //循环模式
-                _currentIndex = this._getCycleIndex();
-                break;
-            case MODE.RANDOM:
-                //随机模式
-                _currentIndex = this._getRandomIndex();
-                break;
-            default :
-                //正常模式
-                _currentIndex = this._getNormalNextIndex();
-                break;
+
+        if (index != undefined) {
+            _currentIndex = index;
+        } else {
+            switch (mode) {
+                case MODE.NORMAL:
+                    //正常模式
+                    _currentIndex = this._getNormalNextIndex();
+                    break;
+                case MODE.CYCLE:
+                    //循环模式
+                    _currentIndex = this._getCycleIndex();
+                    break;
+                case MODE.RANDOM:
+                    //随机模式
+                    _currentIndex = this._getRandomIndex();
+                    break;
+                default :
+                    //正常模式
+                    _currentIndex = this._getNormalNextIndex();
+                    break;
+            }
         }
+
 
         this.setState({
             musicHash: (new Date()).getTime(),
             currentIndex: _currentIndex,
             overallLength: '60',
             currentTime: '0',
-            isPlay: false
+            isPlay: false,
+            showMusicList: false,
         });
         //500毫秒后，进行播放
         setTimeout(
@@ -152,7 +164,8 @@ export default class SmartHomeContainer extends Component {
             currentIndex: _currentIndex,
             overallLength: '60',
             currentTime: '0',
-            isPlay: false
+            isPlay: false,
+            showMusicList: false,
         });
         //500毫秒后，进行播放
         setTimeout(
@@ -309,6 +322,16 @@ export default class SmartHomeContainer extends Component {
         })
     }
 
+    /**
+     * 控制音乐列表是否显示
+     * @param isShow
+     */
+    _toggleMusicList(isShow) {
+        this.setState({
+            showMusicList: isShow
+        })
+    }
+
     render() {
         const {
             currentTime,
@@ -317,14 +340,15 @@ export default class SmartHomeContainer extends Component {
             currentIndex,
             musicHash,
             mode,
-            musicList
+            musicList,
+            showMusicList
             } = this.state;
 
         const music = musicList[currentIndex];//当前播放音乐
         return (
             <View style={styles.smart_home_container}>
                 <StatusBar hidden={true}/>
-                <Navbar/>
+                <Navbar toggleMusicList={this._toggleMusicList}/>
                 <MusicContainer songImg={music['songImg']}
                                 songName={music['songName']}
                                 songAuthor={music['songAuthor']}
@@ -356,6 +380,10 @@ export default class SmartHomeContainer extends Component {
                        onProgress={this._setTime}
                        onError={this._videoError}
                     />
+                }
+                {showMusicList &&
+                <MusicList toggleMusicList={this._toggleMusicList}
+                           onPlayNext={this._onPlayNext}/>
                 }
             </View>
         )
