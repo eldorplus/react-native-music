@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Image,
 } from 'react-native';
-import Utils from './Utils';
+import Utils from '../../utils/Utils';
 
 export default class MusicContainer extends Component {
 

@@ -7,7 +7,7 @@ import {
     PanResponder,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import MODE from '../Data/Mode'; //播放模式，包含正常、随机、循环
+import MODE from '../../Data/Mode'; //播放模式，包含正常、随机、循环
 
 export default class MusicControllerBar extends Component {
     render() {

@@ -9,9 +9,9 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 
-import Utils from'./Utils';
+import Utils from '../../utils/Utils';
 
-import MUSICLIST from '../Data/MusicList';//音乐数据
+import MUSICLIST from '../../Data/MusicList';//音乐数据
 
 export default class MusicList extends Component {
 

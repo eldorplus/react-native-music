@@ -12,17 +12,17 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Video from 'react-native-video';
 //组件
-import Navbar from './components/Navbar';
-import MusicContainer from './components/MusicContainer';
-import MusicControllerLine from './components/MusicControllerLine';
-import MusicControllerBar from './components/MusicControllerBar';
-import Utils from'./components/Utils';
+import Navbar from '../components/musicDetail/Navbar';
+import MusicContainer from '../components/musicDetail/MusicContainer';
+import MusicControllerLine from '../components/musicDetail/MusicControllerLine';
+import MusicControllerBar from '../components/musicDetail/MusicControllerBar';
+import Utils from'../utils/Utils';
 
-import MusicList from './components/MusicList';
+import MusicList from '../components/musicDetail/MusicList';
 
 //模拟数据
-import MUSICLIST from './Data/MusicList';//音乐数据
-import MODE from './Data/Mode'; //播放模式，包含正常、随机、循环
+import MUSICLIST from '../Data/MusicList';//音乐数据
+import MODE from '../Data/Mode'; //播放模式，包含正常、随机、循环
 
 export default class SmartHomeContainer extends Component {
     // 构造
@@ -367,9 +367,9 @@ export default class SmartHomeContainer extends Component {
                     />
                 {music['songUrl'] != '' &&
                 <Video ref={(ref)=>this.video=ref}
-                       source={{uri:music['songUrl']+'?t='+musicHash }} // Can be a URL or a local file.
-                       rate={isPlay?1:0}                   // 0 is paused, 1 is normal.
-                       paused={!isPlay}               // Pauses playback entirely.
+                       source={{uri:music['songUrl']+'?t='+musicHash }}
+                       rate={isPlay?1:0}
+                       paused={!isPlay}
                        repeat={mode==MODE.CYCLE}
                        playInBackground={true}
                        onLoadStart={this._loadStart}

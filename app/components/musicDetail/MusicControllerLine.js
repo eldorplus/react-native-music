@@ -9,7 +9,7 @@ import {
     PanResponder,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Utils from './Utils';
+import Utils from '../../utils/Utils';
 
 export default class MusicControllerLine extends Component {
     // 构造

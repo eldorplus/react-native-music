@@ -15,8 +15,6 @@ const {
     StateUtils : NavigationStateUtils,
     } = NavigationExperimental;
 
-import SmartHomeContainer from './SmartHomeContainer';
-
 
 function createReducer(initialState) {
     return (currentState = initialState, action)=> {
@@ -35,32 +33,40 @@ function createReducer(initialState) {
                     return currentState;
                 }
                 break;
+            case 'replaceAtIndex':
+                return NavigationStateUtils.replaceAtIndex(currentState, action.index, {...action});
             default :
                 return currentState;
         }
     }
 }
 
-const NavReducer = createReducer({
-    index: 0,
-    routes: [
-        {
-            key: 'SmartHomeContainer',
-            component: SmartHomeContainer
-        }
-    ]
-});
+//const NavReducer = createReducer({
+//    index: 0,
+//    routes: [
+//        {
+//            key: 'SmartHomeContainer',
+//            component: SmartHomeContainer
+//        }
+//    ]
+//});
 
-export default class App extends Component {
+export default class Navigation extends Component {
     // 构造
     constructor(props) {
         super(props);
+        this.NavReducer = createReducer({
+            index: 0,
+            routes: [
+                this.props.initialRoute
+            ]
+        });
         // 初始状态
         this.state = {
-            navState: NavReducer(undefined, {})
+            navState: this.NavReducer(undefined, {})
         };
         //首先把this给锁定
-        this._handleAction = this._handleAction.bind(this);
+        this._handleNavAction = this._handleNavAction.bind(this);
         this._renderScene = this._renderScene.bind(this);
     }
 
@@ -70,8 +76,8 @@ export default class App extends Component {
      * @returns {boolean}
      * @private
      */
-    _handleAction(action) {
-        const state = NavReducer(this.state.navState, action);
+    _handleNavAction(action) {
+        const state = this.NavReducer(this.state.navState, action);
         if (state == this.state.navState) {
             return false
         } else {
@@ -89,19 +95,28 @@ export default class App extends Component {
      * @private
      */
     _renderScene(nav) {
+        console.log('a');
         const Component = nav.scene.route.component;
         return (
-            <Component handleAction={this._handleAction} {...nav.scene.route.passProps} {...this.props}/>
+            <Component navDispatch={this._handleNavAction} {...nav.scene.route.params} {...this.props}/>
         )
     }
-
+    componentWillReceiveProps(nextProps){
+        var action={
+            type:'replaceAtIndex',
+            index:this.state.navState.index,
+            ...nextProps
+        }
+        const _state = this.NavReducer(this.state.navState, action);
+        this.setState(_state);
+    }
     render() {
         return (
             <View style={{flex:1}}>
                 <StatusBar hidden={true}/>
                 <NavigationCardStack
                     navigationState={this.state.navState}
-                    onNavigate={this._handleAction}
+                    onNavigate={this._handleNavAction}
                     renderScene={this._renderScene}
                     />
             </View>
