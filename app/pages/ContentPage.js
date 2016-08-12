@@ -12,6 +12,10 @@ import ContentSwiper from '../components/content/ContentSwiper';
 import ContentList from '../components/content/ContentList';
 
 export default class ContentPage extends Component {
+    componentDidMount() {
+        const {actions} = this.props;
+        actions.setTabbarIsShow(true);
+    }
 
     render() {
         const {actions,router,content} = this.props;

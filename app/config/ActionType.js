@@ -3,7 +3,9 @@
  * 存放全局的 action类型
  */
 export const APP = {
-    SPLASH: 'SPLASH'
+    SPLASH: 'SPLASH',
+    TABBARSELECT: 'TABBARSELECT',
+    TABBARHEIGHT: 'TABBARHEIGHT',
 }
 
 /**

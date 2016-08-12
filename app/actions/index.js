@@ -19,6 +19,8 @@
 'use strict';
 import {
     closeSplashScreen,
+    setTabbarItem,
+    setTabbarIsShow,
 } from './application';
 
 import {
@@ -27,6 +29,8 @@ import {
 } from './content';
 
 const actions = {
+    setTabbarIsShow,//设置tabbar是否展示
+    setTabbarItem,//设置item
     closeSplashScreen,//关闭闪屏
     getSliders,//获取幻灯片
     getExcel,

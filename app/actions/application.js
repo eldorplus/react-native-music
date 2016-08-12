@@ -23,3 +23,34 @@ export function closeSplashScreen() {
         );
     }
 }
+/**
+ * 设置选中条
+ * @param item
+ * @returns {Function}
+ */
+export function setTabbarItem(item) {
+    return (dispatch)=> {
+        return Promise.resolve(
+            dispatch({
+                type: APP.TABBARSELECT,
+                data: item
+            })
+        )
+    }
+}
+/**
+ * 设置底部栏是否显示
+ * @param isShow
+ * @returns {Function}
+ */
+export function setTabbarIsShow(isShow) {
+    let height = isShow == true ? 49 : 0;
+    return (dispatch)=> {
+        return Promise.resolve(
+            dispatch({
+                type: APP.TABBARHEIGHT,
+                data: height
+            })
+        )
+    }
+}

@@ -23,13 +23,15 @@ import { connect } from 'react-redux';
  * 即：不希望将 redux store 和 dispatch传给它
  */
 import {bindActionCreators} from 'redux';
+import TabNavigator from 'react-native-tab-navigator';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import allActions from '../actions';//所有actions
 
 
 import Splash from './Splash';//闪屏container
 import ContentContainer from './ContentContainer';
-
+import MyMusicContainer from './MyMusicContainer';
 
 class App extends Component {
     // 构造
@@ -39,17 +41,48 @@ class App extends Component {
 
     render() {
         const {application,actions,content,} = this.props;
-        const {isShowSplash} = application;
+        const {isShowSplash,selectedTab,tabBarHeight} = application;
         if (isShowSplash) {
             return (
                 <Splash actions={actions}/>
             )
         }
         return (
-            <View style={{flex:1}}>
-                <StatusBar hidden={true}/>
-                <ContentContainer {...this.props}/>
-            </View>
+            <TabNavigator
+                tabBarStyle={{height:tabBarHeight,overflow:'hidden'}}
+                sceneStyle={{paddingBottom:tabBarHeight}}>
+
+                <TabNavigator.Item
+                    selected={selectedTab == 'content'}
+                    title="精选"
+                    onPress={()=>actions.setTabbarItem('content')}
+                    renderIcon={()=> <Icon name="diamond" size={24} color="#666"/>}
+                    renderSelectedIcon={()=> <Icon name="diamond" size={24} color="#dd3f40"/> }
+                    titleStyle={{fontSize:12,marginBottom:4,}}
+                    selectedTitleStyle={{fontSize:12,marginBottom:4,color:'#dd3f40'}}
+                    >
+                    <View style={{flex:1}}>
+                        <StatusBar hidden={true}/>
+                        <ContentContainer {...this.props}/>
+                    </View>
+                </TabNavigator.Item>
+
+                <TabNavigator.Item
+                    title="装备库"
+                    selected={selectedTab == 'equipment_ku'}
+                    onPress={()=>actions.setTabbarItem('equipment_ku')}
+                    renderIcon={()=> <Icon name="cube" size={24} color="#666"/>}
+                    renderSelectedIcon={()=> <Icon name="cube" size={24} color="#dd3f40"/>}
+                    titleStyle={{fontSize:12,marginBottom:4,}}
+                    selectedTitleStyle={{fontSize:12,marginBottom:4,color:'#dd3f40'}}
+                    >
+                    <View style={{flex:1}}>
+                        <StatusBar hidden={true}/>
+                        <MyMusicContainer {...this.props}/>
+                    </View>
+                </TabNavigator.Item>
+
+            </TabNavigator>
         )
     }
 }
@@ -64,6 +97,8 @@ App.propTypes = {
 function mapStateToProps(state) {
     return {
         application: {
+            selectedTab: state.application.selectedTab,
+            tabBarHeight: state.application.tabBarHeight,
             isShowSplash: state.application.isShowSplash
         },
         content: {

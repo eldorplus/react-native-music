@@ -4,7 +4,9 @@
 'use strict';
 import {Navigator,View} from 'react-native';
 
-import SmartHomeContainer from '../pages/SmartHomeContainer';
+import ContentDetail from './content/ContentDetail';
+import SearchPage from '../pages/SearchPage';
+
 export default class Router {
     constructor(navigator) {
         this.navigator = navigator;
@@ -25,12 +27,18 @@ export default class Router {
     }
 
     //params是个对象
-    toChooseFeeling(params) {
+    toContentDetail(params) {
         this.navigator.push({
-            component: SmartHomeContainer,
+            component: ContentDetail,
             params: params,
         })
     }
 
+    toSearchPage() {
+        this.navigator.push({
+            component: SearchPage,
+            params: {a:1}
+        });
+    }
 
 }
