@@ -4,6 +4,9 @@ import {SEARCH} from '../config/ActionType';
 import realm from '../model/realm';
 import Utils from '../utils/Utils';
 
+import API from '../config/Api';
+import Ajax from '../utils/Ajax';
+
 let history_list_object = undefined;
 
 
@@ -99,7 +102,10 @@ export function startSearch(search_text) {
         return Promise.resolve(
             dispatch({
                 type: SEARCH.UPDATE_SEARCH_TEXT,
-                data: search_text
+                data: {
+                    'is_show_search_result':false,
+                    'search_text':search_text,
+                }
             })
         )
     }
@@ -115,7 +121,10 @@ export function changeSearchText(text) {
         return Promise.resolve(
             dispatch({
                 type: SEARCH.UPDATE_SEARCH_TEXT,
-                data: text
+                data: {
+                    'search_text':text,
+                    'is_show_search_result':false,
+                }
             })
         )
     }
@@ -126,12 +135,22 @@ export function changeSearchText(text) {
  * @param text
  */
 export function getSearchResult(text) {
-    return (disptach)=> {
-        return Promise.resolve(
-            dispatch({
-                type: SEARCH.GET_SEARCH_RESULT,
-                data: ''
-            })
-        )
+    return (dispatch)=> {
+        Ajax.get(API.SEARCH_SONG,{key:text},(data)=>{
+            if(data.code==0){
+                const songs = data['data']['song']['itemlist'];
+                return Promise.resolve(
+                    dispatch({
+                        type: SEARCH.GET_SEARCH_RESULT,
+                        data: {
+                            'is_show_search_result':true,
+                            'search_result_list':songs,
+                        }
+                    })
+                )
+            }
+
+        });
+
     }
 }

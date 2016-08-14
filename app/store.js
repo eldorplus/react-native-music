@@ -35,9 +35,22 @@ import {
  *  这时候，action createor除了返回action对象外，还可以返回函数。
  */
 import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+
+//http://cn.redux.js.org/docs/api/applyMiddleware.html
+//只有在开发环境使用
+const middlewares = [thunk];
+if(process.env.NODE_ENV !=='production'){
+    const logger = createLogger();
+    middlewares.push(logger);
+}
+
+
 
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+//const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+
 const store = createStoreWithMiddleware(reducers);
 export default store;

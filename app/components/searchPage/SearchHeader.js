@@ -40,6 +40,7 @@ export default class SearchHeader extends Component {
         const search_text = event.nativeEvent.text;
         const {actions,searchText} = this.props;
         actions.startSearch(search_text);
+        actions.getSearchResult(search_text);
     }
 
     _onChangeText(text) {

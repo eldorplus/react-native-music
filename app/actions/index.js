@@ -33,6 +33,7 @@ import {
     getHistoryList,
     removeSomeHistoryWord,
     changeSearchText,
+    getSearchResult,
 } from './search';
 
 const actions = {
@@ -40,6 +41,7 @@ const actions = {
     getHistoryList,
     changeSearchText,
     removeSomeHistoryWord,
+    getSearchResult,
     setTabbarIsShow,//设置tabbar是否展示
     setTabbarItem,//设置item
     closeSplashScreen,//关闭闪屏

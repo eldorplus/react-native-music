@@ -108,6 +108,8 @@ function mapStateToProps(state) {
         search: {
             search_text: state.search.search_text,
             history_list: state.search.history_list,
+            search_result_list: state.search.search_result_list,
+            is_show_search_result: state.search.is_show_search_result
         }
     }
 }

@@ -17,7 +17,7 @@ function toQueryString(obj) {
 }
 
 const Ajax = {
-    post: function (url, params, callback) {
+    post: (url, params, callback)=> {
         fetch(url, {
             method: 'POST',
             headers: {
@@ -29,6 +29,17 @@ const Ajax = {
         })
             .then(res => res.json())
             .then(res => {
+                callback(res);
+            }
+        ).done();
+    },
+    //fixme  先判断url是否有 &符号
+    get: (url, params, callback)=> {
+        url = url + '&' + toQueryString(params);
+        fetch(url)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
                 callback(res);
             }
         ).done();

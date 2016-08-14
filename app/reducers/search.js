@@ -10,6 +10,7 @@ import {SEARCH} from '../config/ActionType';
 const initState = {
     search_text: '',
     history_list: [],
+    is_show_search_result: false,
     search_result_list: [],
 }
 
@@ -22,13 +23,15 @@ const actionHandler = {
     },
     [SEARCH.UPDATE_SEARCH_TEXT]: (state, action)=> {
         const newState = Object.assign({}, state, {
-            search_text: action.data,
+            search_text: action.data.search_text,
+            is_show_search_result: action.data.is_show_search_result,
         });
         return newState;
     },
     [SEARCH.GET_SEARCH_RESULT]: (state, action)=> {
         const newState = Object.assign({}, state, {
-            search_result_list: action.data
+            search_result_list: action.data.search_result_list,
+            is_show_search_result: action.data.is_show_search_result,
         });
         return newState;
     }
