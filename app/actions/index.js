@@ -28,7 +28,18 @@ import {
     getExcel,
 } from './content';
 
+import {
+    startSearch,
+    getHistoryList,
+    removeSomeHistoryWord,
+    changeSearchText,
+} from './search';
+
 const actions = {
+    startSearch,
+    getHistoryList,
+    changeSearchText,
+    removeSomeHistoryWord,
     setTabbarIsShow,//设置tabbar是否展示
     setTabbarItem,//设置item
     closeSplashScreen,//关闭闪屏

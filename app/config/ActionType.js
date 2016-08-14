@@ -18,3 +18,12 @@ export const CONTENT = {
     END_GET_EXCEL: 'END_GET_EXCEL',//结束加载精选
     LOADING_END_EXCEL: 'LOADING_END_EXCEL',//精选加载完毕了
 }
+
+/**
+ * 搜索模块
+ */
+export const SEARCH = {
+    'UPDATE_HISTORY_SEARCH': 'UPDATE_HISTORY_SEARCH',
+    'UPDATE_SEARCH_TEXT': 'UPDATE_SEARCH_TEXT',
+    'GET_SEARCH_RESULT': 'GET_SEARCH_RESULT'
+}

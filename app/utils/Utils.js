@@ -1,4 +1,7 @@
 import {Dimensions} from 'react-native';
+
+const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+
 const Utils = {
     window: {
         width: Dimensions.get("window").width,
@@ -28,6 +31,36 @@ const Utils = {
             }
             return minute + ':' + _second;
         },
-    }
+    },
+    /**
+     * 生成唯一id
+     * @param len
+     * @param radix
+     */
+    uuid: (len, radix)=> {
+        var chars = CHARS, uuid = [], i;
+        radix = radix || chars.length;
+
+        if (len) {
+            for (i = 0; i < len; i++) {
+                uuid[i] = chars[0 | Math.random() * radix];
+            }
+        } else {
+            var r;
+            uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+            uuid[14] = 4;
+
+            for (i = 0; i < 36; i++) {
+                if (!uuid[i]) {
+                    r = 0 | Math.random() * 16;
+                    uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                }
+            }
+        }
+        return uuid.join('');
+    },
+    getCurrentTimestamp: ()=> {
+        return (new Date()).valueOf()+'';
+    },
 }
 export default  Utils;

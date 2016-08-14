@@ -36,8 +36,8 @@ export default class Router {
 
     toSearchPage() {
         this.navigator.push({
+            name: 'SearchPage',
             component: SearchPage,
-            params: {a:1}
         });
     }
 

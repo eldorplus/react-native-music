@@ -17,10 +17,12 @@ import { combineReducers} from 'redux';
 
 import application from './application';
 import content from './content';
+import search from './search';
 
 const reducers = combineReducers({
     application,
-    content
+    content,
+    search,
 });
 
 export default reducers;

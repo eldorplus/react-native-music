@@ -19,13 +19,14 @@ export default class MyMusicPage extends Component {
         actions.setTabbarIsShow(false);
     }
 
+
     render() {
         const {actions,router} = this.props;
         return (
             <View style={styles.container}>
                 <Header actions={actions} router={router}/>
                 <ScrollView style={styles.scrollView}>
-                    <SearchBar actions={actions} router={router}/>
+                    <SearchBar actions={actions} router={router} />
                     <MyMusicList actions={actions} router={router}/>
                 </ScrollView>
                 <FooterPlayBar actions={actions} router={router}/>

@@ -1,6 +1,7 @@
 package com.reactnativemusic;
 
 import com.facebook.react.ReactActivity;
+import io.realm.react.RealmReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.brentvatne.RCTVideo.ReactVideoPackage;
 
