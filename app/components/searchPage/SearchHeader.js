@@ -48,6 +48,15 @@ export default class SearchHeader extends Component {
         actions.changeSearchText(text);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        const {searchText}=this.props;
+        if (searchText != nextProps.searchText) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render() {
         const {searchText} = this.props;
         return (

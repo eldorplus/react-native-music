@@ -18,11 +18,13 @@ import { combineReducers} from 'redux';
 import application from './application';
 import content from './content';
 import search from './search';
+import playmusic from './playmusic';
 
 const reducers = combineReducers({
     application,
     content,
     search,
+    playmusic,
 });
 
 export default reducers;

@@ -9,10 +9,36 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Navbar extends Component {
+    // 构造
+    constructor(props) {
+        super(props);
+        this.showMusicList = this.showMusicList.bind(this);
+        this._onNarbarReturnPress = this._onNarbarReturnPress.bind(this);
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    showMusicList() {
+        const {actions} = this.props;
+        actions.toggleMusicList(true)
+    }
+
+    /**
+     * 头部导航栏，返回按钮点击事件
+     * @private
+     */
+    _onNarbarReturnPress() {
+        const {actions} = this.props;
+        actions.set_is_show_music_detail(false);
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
     render() {
-        const {
-            toggleMusicList
-            } =this.props;
 
         return (
             <View style={styles.nav_bar}>
@@ -21,7 +47,7 @@ export default class Navbar extends Component {
                     size={20}
                     color="white"
                     backgroundColor="transparent"
-                    onPress={()=>{}}
+                    onPress={this._onNarbarReturnPress}
                     style={{justifyContent:'center'}}
                     iconStyle={{marginRight:0}}
                     />
@@ -30,7 +56,7 @@ export default class Navbar extends Component {
                     name="list" size={20}
                     color="white"
                     backgroundColor="transparent"
-                    onPress={()=>{toggleMusicList(true)}}
+                    onPress={this.showMusicList}
                     style={{justifyContent:'center'}}
                     iconStyle={{marginRight:0}}
                     />

@@ -10,6 +10,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import MODE from '../../Data/Mode'; //播放模式，包含正常、随机、循环
 
 export default class MusicControllerBar extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        const {mode,isPlay} =this.props;
+        if (mode != nextProps.mode || isPlay != nextProps.isPlay) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render() {
         const {
             onPlay,

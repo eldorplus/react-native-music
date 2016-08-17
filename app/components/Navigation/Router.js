@@ -4,12 +4,17 @@
 'use strict';
 import {Navigator,View} from 'react-native';
 
-import ContentDetail from './content/ContentDetail';
-import SearchPage from '../pages/SearchPage';
+import ContentDetail from '../Content/ContentDetail';
+import SearchPage from '../../pages/SearchPage';
+import MusicDetailPage from '../../pages/MusicDetailPage';
 
 export default class Router {
     constructor(navigator) {
         this.navigator = navigator;
+        this.pop=this.pop.bind(this);
+        this.popToTop=this.popToTop.bind(this);
+        this.toContentDetail=this.toContentDetail.bind(this);
+        this.toSearchPage=this.toSearchPage.bind(this);
     }
 
     /**

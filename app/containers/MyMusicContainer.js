@@ -8,21 +8,26 @@ import {
 
 import Navigation from '../components/Navigation';//导航
 import MyMusicPage from '../pages/MyMusicPage';
+import FooterPlayBar from '../components/FooterPlayBar';
 
 export default class MusicContainer extends Component {
 
     render() {
+        const {actions,router}=this.props;
         return (
-            <Navigation
-                initialRoute={{
+            <View style={{flex:1}}>
+                <Navigation
+                    initialRoute={{
                         name: 'MyMusicPage',
                         component: MyMusicPage,
                         params:{
-                            actions:this.props.actions,
+                            actions:actions,
                         }
                         }}
-                search={this.props.search}
-                />
+                    search={this.props.search}
+                    />
+                <FooterPlayBar actions={actions} playmusic={this.props.playmusic}/>
+            </View>
         )
     }
 }

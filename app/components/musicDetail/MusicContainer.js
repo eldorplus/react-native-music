@@ -10,6 +10,18 @@ import {
 import Utils from '../../utils/Utils';
 
 export default class MusicContainer extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        const {
+            songImg,
+            songName,
+            songAuthor
+            } = this.props;
+        if (songImg != nextProps.songImg || songName != nextProps.songName || songAuthor != nextProps.songAuthor) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     render() {
         const {

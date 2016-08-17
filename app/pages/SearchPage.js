@@ -6,9 +6,9 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import SearchHeader from '../components/searchPage/SearchHeader';
-import HotSearch from '../components/searchPage/HotSearch';
-import HistorySearch from '../components/searchPage/HistorySearch';
+import SearchHeader from '../components/SearchPage/SearchHeader';
+import HotSearch from '../components/SearchPage/HotSearch';
+import HistorySearch from '../components/SearchPage/HistorySearch';
 
 
 export default class SearchPage extends Component {

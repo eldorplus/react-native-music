@@ -31,7 +31,11 @@ const Ajax = {
             .then(res => {
                 callback(res);
             }
-        ).done();
+        )
+            .catch(msg=> {
+                console.log('ajax-post-error:' + msg)
+            })
+            .done();
     },
     //fixme  先判断url是否有 &符号
     get: (url, params, callback)=> {
@@ -42,7 +46,11 @@ const Ajax = {
                 console.log(res);
                 callback(res);
             }
-        ).done();
+        )
+            .catch(msg=> {
+                console.log('ajax-post-error:' + msg)
+            })
+            .done();
     }
 }
 export default Ajax;

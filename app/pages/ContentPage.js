@@ -8,8 +8,8 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import ContentSwiper from '../components/content/ContentSwiper';
-import ContentList from '../components/content/ContentList';
+import ContentSwiper from '../components/Content/ContentSwiper';
+import ContentList from '../components/Content/ContentList';
 
 export default class ContentPage extends Component {
     componentDidMount() {

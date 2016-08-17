@@ -40,7 +40,7 @@ class App extends Component {
     }
 
     render() {
-        const {application,actions,content,search} = this.props;
+        const {application,actions,content,search,playmusic} = this.props;
         const {isShowSplash,selectedTab,tabBarHeight} = application;
         if (isShowSplash) {
             return (
@@ -78,7 +78,7 @@ class App extends Component {
                     >
                     <View style={{flex:1}}>
                         <StatusBar hidden={true}/>
-                        <MyMusicContainer actions={actions} search={search}/>
+                        <MyMusicContainer actions={actions} search={search} playmusic={playmusic}/>
                     </View>
                 </TabNavigator.Item>
 
@@ -110,6 +110,17 @@ function mapStateToProps(state) {
             history_list: state.search.history_list,
             search_result_list: state.search.search_result_list,
             is_show_search_result: state.search.is_show_search_result
+        },
+        playmusic: {
+            is_show_detail_page: state.playmusic.is_show_detail_page,
+            musicList: state.playmusic.musicList,
+            currentIndex: state.playmusic.currentIndex,
+            overallLength: state.playmusic.overallLength,
+            currentTime: state.playmusic.currentTime,
+            mode: state.playmusic.mode,
+            musicHash: state.playmusic.musicHash,
+            isPlay: state.playmusic.isPlay,
+            showMusicList: state.playmusic.showMusicList,
         }
     }
 }

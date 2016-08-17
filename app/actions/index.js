@@ -17,35 +17,18 @@
  */
 
 'use strict';
-import {
-    closeSplashScreen,
-    setTabbarItem,
-    setTabbarIsShow,
-} from './application';
+import * as application from './application';
 
-import {
-    getSliders,
-    getExcel,
-} from './content';
+import * as content from './content';
 
-import {
-    startSearch,
-    getHistoryList,
-    removeSomeHistoryWord,
-    changeSearchText,
-    getSearchResult,
-} from './search';
+import * as search from './search';
+
+import * as playmusic from './playmusic';
 
 const actions = {
-    startSearch,
-    getHistoryList,
-    changeSearchText,
-    removeSomeHistoryWord,
-    getSearchResult,
-    setTabbarIsShow,//设置tabbar是否展示
-    setTabbarItem,//设置item
-    closeSplashScreen,//关闭闪屏
-    getSliders,//获取幻灯片
-    getExcel,
+    ...application,
+    ...content,
+    ...search,
+    ... playmusic,
 }
 export default actions;

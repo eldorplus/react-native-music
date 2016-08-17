@@ -17,8 +17,8 @@ export default class MusicControllerLine extends Component {
         super(props);
         // 初始状态
         this.state = {
-            'currentTime': '0',
-            'lineCircleLeft': 0
+            'currentTime': this.props.currentTime || 0,
+            'lineCircleLeft': this.calculLine(this.props.overallLength, this.props.currentTime)
         };
     }
 

@@ -7,6 +7,7 @@ import {
     ListView,
     TextInput,
     TouchableWithoutFeedback,
+    InteractionManager,
     StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,6 +23,7 @@ export default class HistorySearch extends Component {
         this._renderRow = this._renderRow.bind(this);
         this._setSearchWord = this._setSearchWord.bind(this);
         this._removeHistory = this._removeHistory.bind(this);
+        console.log('hs,constructor');
 
     }
 
@@ -35,9 +37,10 @@ export default class HistorySearch extends Component {
 
         if (historyList.length == 0) {
             //fixme 我也不知道为什么，这样写就正常了
-            setTimeout(()=> {
-                actions.getHistoryList();
-            }, 0);
+            InteractionManager.runAfterInteractions(()=>actions.getHistoryList());
+            //    setTimeout(()=> {
+            //        actions.getHistoryList();
+            //    }, 0);
         }
     }
 
@@ -153,9 +156,9 @@ const history_style = StyleSheet.create({
         fontSize: 16,
         color: '#333'
     },
-    close_btn:{
-      paddingLeft:20,
-        paddingRight:14,
+    close_btn: {
+        paddingLeft: 20,
+        paddingRight: 14,
     },
     footer: {
         paddingTop: 20,

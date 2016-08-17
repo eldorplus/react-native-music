@@ -18,9 +18,8 @@ export default class MusicList extends Component {
     // 构造
     constructor(props) {
         super(props);
-        // 初始状态
-        this.state = {};
         this._renderListItem = this._renderListItem.bind(this);
+        this.closeMusicList = this.closeMusicList.bind(this);
     }
 
     _renderListItem(music, i) {
@@ -29,13 +28,29 @@ export default class MusicList extends Component {
             }= this.props;
         return (
             <TouchableWithoutFeedback key={i}
-                onPress={()=>onPlayNext(i)}>
+                                      onPress={()=>onPlayNext(i)}>
                 <View style={styles.list_item}>
                     <Text style={styles.li_song_name}>{music.songName}</Text>
                     <Text style={styles.li_song_author}>{music.songAuthor}</Text>
                 </View>
             </TouchableWithoutFeedback>
         )
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const {
+            toggleMusicList,
+            } =this.props;
+        if (toggleMusicList != nextProps.toggleMusicList) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    closeMusicList() {
+        const {actions} = this.props;
+        actions.toggleMusicList(false)
     }
 
     render() {
@@ -56,7 +71,7 @@ export default class MusicList extends Component {
                         })}
                     </ScrollView>
                     <TouchableWithoutFeedback
-                        onPress={()=>{toggleMusicList(false)}}>
+                        onPress={this.closeMusicList}>
                         <View style={styles.btn_close}>
                             <Text style={styles.btn_close_text}>关闭</Text>
                         </View>

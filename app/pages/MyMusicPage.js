@@ -8,10 +8,9 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import Header from '../components/myMusic/Header';
-import SearchBar from '../components/myMusic/SearchBar';
-import MyMusicList from '../components/myMusic/MyMusicList';
-import FooterPlayBar from '../components/myMusic/FooterPlayBar';
+import Header from '../components/MyMusic/Header';
+import SearchBar from '../components/MyMusic/SearchBar';
+import MyMusicList from '../components/MyMusic/MyMusicList';
 
 export default class MyMusicPage extends Component {
     componentDidMount() {
@@ -26,10 +25,9 @@ export default class MyMusicPage extends Component {
             <View style={styles.container}>
                 <Header actions={actions} router={router}/>
                 <ScrollView style={styles.scrollView}>
-                    <SearchBar actions={actions} router={router} />
+                    <SearchBar actions={actions} router={router}/>
                     <MyMusicList actions={actions} router={router}/>
                 </ScrollView>
-                <FooterPlayBar actions={actions} router={router}/>
             </View>
         )
     }
